@@ -14,7 +14,7 @@
 
 For staging environments...
 
-* [Website Staging] http://staging-mic-kaiyangbanner-api.eggdigital.com
+* [Website Staging] http://staging-mic-kaiyangbanner-api.eggdigital.com:8135
 * [Phpmyadmin Staging] http://192.168.110.132/phpmyadmin
 
 ### Installation
