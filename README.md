@@ -9,8 +9,13 @@
 
 ### Port&URL
 
-* [Website]-Docker http://mic-kaiyangnews-api.dev:8135
-* [Phpmyadmin]-Docker http://mic-kaiyangnews-api.dev:32065
+* [Website Docker] http://mic-kaiyangnews-api.dev:8135
+* [Phpmyadmin Docker] http://mic-kaiyangnews-api.dev:32065
+
+For staging environments...
+
+* [Website Staging] http://staging-mic-kaiyangbanner-api.eggdigital.com
+* [Phpmyadmin Staging] http://192.168.110.132/phpmyadmin
 
 ### Installation
 
