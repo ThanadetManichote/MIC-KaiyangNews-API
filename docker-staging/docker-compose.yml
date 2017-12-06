@@ -1,0 +1,10 @@
+mic-kaiyangnews-api-web:
+  build: web/
+  tty: true
+  ports:
+    - "8135:80"
+  volumes:
+    - ../:/var/www/html
+  environment:
+    ENVIRONMENT: staging
+  container_name: mic-kaiyangnews-api-web
