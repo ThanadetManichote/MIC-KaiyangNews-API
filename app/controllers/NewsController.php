@@ -34,7 +34,6 @@ class NewsController extends ApiController
         $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
-        $params['link'] = isset($inputs['link'])?$inputs['link']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
 
 
@@ -74,7 +73,6 @@ class NewsController extends ApiController
         $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
-        $params['link'] = isset($inputs['link'])?$inputs['link']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
 
         $result = $this->repository->updateRepo($condition , $params);
