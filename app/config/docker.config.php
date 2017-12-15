@@ -29,5 +29,5 @@ $settings = [
         'baseUri'        => 'http://alpha-kaiyang-myanmar-api.eggdigital.com/',
         'staticUri'      => 'http://alpha-kaiyang-myanmar-api.eggdigital.com/',
     ],
-    'image_path'  => 'http://staging-admin-kaiyang.eggdigital.com:8840/uploads/news/',
+    'image_path'  => 'http://kaiyang.dev:8840/uploads/news/',
 ];
