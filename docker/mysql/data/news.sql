@@ -38,17 +38,19 @@ CREATE TABLE `news` (
   `end_date` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` enum('active','inactive') DEFAULT 'inactive'
+  `status` enum('active','inactive') DEFAULT 'inactive',
+  `sent_status` ENUM('1','2') NOT NULL COMMENT '1=Active (not sent), 2=Sent ',
+  `sent_date` DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `name`, `detail`, `thumbnail`, `image`, `app_show`, `position`, `start_date`, `end_date`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'aaaa', 'ccc', 'dea5b3e3f8eb325a205b2c7afdee17e6_thumbnail.png', 'b2655192013176a77c6a35f89ea8eba9_image.png', 'customer', 0, '2017-10-05 00:00:00', '2017-10-06 00:00:00', '2017-10-23 21:32:47', '2017-10-23 21:40:44', 'active'),
-(2, 'cccccc', '5555', 'b08194d00e872f64c80cf7085faf4f20_thumbnail.png', 'b08194d00e872f64c80cf7085faf4f20_image.png', 'business', 0, '2017-10-26 00:00:00', '2017-10-30 00:00:00', '2017-10-23 21:40:23', '2017-10-24 10:10:46', 'active'),
-(3, 'aaaaa', 'ddd', '5aaeceec3d5ec311148ba34f5fb53c56_thumbnail.png', '5aaeceec3d5ec311148ba34f5fb53c56_image.png', 'customer', 0, '2017-10-25 00:00:00', '2017-10-27 00:00:00', '2017-10-24 10:11:48', '2017-10-24 10:11:48', 'active');
+INSERT INTO `news` (`id`, `name`, `detail`, `thumbnail`, `image`, `app_show`, `position`, `start_date`, `end_date`, `created_at`, `updated_at`, `status`, `sent_status`, `sent_date`) VALUES
+(1, 'aaaa', 'ccc', 'dea5b3e3f8eb325a205b2c7afdee17e6_thumbnail.png', 'b2655192013176a77c6a35f89ea8eba9_image.png', 'customer', 0, '2017-10-05 00:00:00', '2017-10-06 00:00:00', '2017-10-23 21:32:47', '2017-10-23 21:40:44', 'active',1,''),
+(2, 'cccccc', '5555', 'b08194d00e872f64c80cf7085faf4f20_thumbnail.png', 'b08194d00e872f64c80cf7085faf4f20_image.png', 'business', 0, '2017-10-26 00:00:00', '2017-10-30 00:00:00', '2017-10-23 21:40:23', '2017-10-24 10:10:46', 'active',2,''),
+(3, 'aaaaa', 'ddd', '5aaeceec3d5ec311148ba34f5fb53c56_thumbnail.png', '5aaeceec3d5ec311148ba34f5fb53c56_image.png', 'customer', 0, '2017-10-25 00:00:00', '2017-10-27 00:00:00', '2017-10-24 10:11:48', '2017-10-24 10:11:48', 'active',1,'');
 
 --
 -- Indexes for dumped tables
@@ -72,3 +74,5 @@ ALTER TABLE `news`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

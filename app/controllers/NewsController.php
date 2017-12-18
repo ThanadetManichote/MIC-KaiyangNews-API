@@ -35,6 +35,8 @@ class NewsController extends ApiController
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
+        $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
+        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:'';
 
 
         $result = $this->repository->createRepo($params);
@@ -74,6 +76,8 @@ class NewsController extends ApiController
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
+        $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
+        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:'';
 
         $result = $this->repository->updateRepo($condition , $params);
 

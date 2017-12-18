@@ -115,6 +115,8 @@ trait NewsTraits
                     'created_at' => $vData['created_at'],
                     'updated_at' => $vData['updated_at'],
                     'status' => $vData['status'],
+                    'sent_status' => $vData['sent_status'],
+                    'sent_date' => $vData['sent_date'],
                 ];
             }
         }
@@ -140,6 +142,8 @@ trait NewsTraits
                     'created_at' => $data['created_at'],
                     'updated_at' => $data['updated_at'],
                     'status' => $data['status'],
+                    'sent_status' => $data['sent_status'],
+                    'sent_date' => $data['sent_date'],
                 ];
         }
         
