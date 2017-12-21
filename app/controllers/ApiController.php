@@ -368,7 +368,7 @@ class ApiController extends Controller
                 //     $data['msgError_en'] = $data['msgError'];
                 //     $data['msgError_mm'] = t_mm($data['msgError']);
                 // }
-
+                $this->response->setStatusCode($code);
                 $this->response->setJsonContent(array('status_code' => $code, 'status_txt' => $status_reason, 'data' => $data));
 
             }
