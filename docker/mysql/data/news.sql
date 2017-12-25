@@ -40,7 +40,7 @@ CREATE TABLE `news` (
   `updated_at` datetime DEFAULT NULL,
   `status` enum('active','inactive') DEFAULT 'inactive',
   `sent_status` ENUM('1','2') NOT NULL COMMENT '1=Active (not sent), 2=Sent ',
-  `sent_date` DATETIME NOT NULL
+  `sent_date` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

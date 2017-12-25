@@ -363,11 +363,11 @@ class ApiController extends Controller
                     $data = $data[$code];
                 }
 
-                // if (!isset($data['msgError_en']) && isset($data['msgError']) ) 
-                // {
-                //     $data['msgError_en'] = $data['msgError'];
-                //     $data['msgError_mm'] = t_mm($data['msgError']);
-                // }
+                if (!isset($data['msgError_en']) && isset($data['msgError']) ) 
+                {
+                    $data['msgError_en'] = $data['msgError'];
+                    $data['msgError_mm'] = t_mm($data['msgError']);
+                }
                 $this->response->setStatusCode($code);
                 $this->response->setJsonContent(array('status_code' => $code, 'status_txt' => $status_reason, 'data' => $data));
 
