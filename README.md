@@ -1,6 +1,6 @@
 # Kaiyang Microservice News
 
-[![N|Solid](https://www.nunamts.com/cdn/phalcon-readme.jpg)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://www.nunamts.com/cdn/phalcon-readme.jpg)](https://nodesource.com/products/nsolid)
 
 ### Technology
 
@@ -9,8 +9,8 @@
 
 ### Port&URL
 
-* [Website Docker] http://mic-kaiyangnews-api.dev:8135
-* [Phpmyadmin Docker] http://mic-kaiyangnews-api.dev:32065
+* [Website Docker] http://mic-kaiyangnews-api.develop:8135
+* [Phpmyadmin Docker] http://mic-kaiyangnews-api.develop:32065
 
 For staging environments...
 
@@ -23,6 +23,9 @@ For staging environments...
 $ cd mic-kaiyangnews-api
 $ cd docker
 $ sh start_server.sh
+
+$ docker exec -it kaiyang_api_web bash
+$ composer install
 ```
 
 For staging environments...

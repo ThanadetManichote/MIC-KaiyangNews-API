@@ -11,9 +11,9 @@ class NewsController extends ApiController
      */
     use NewsTraits;
 
-	public function initialize()
+    public function initialize()
     {
-    	$this->repository = new NewsRepository();
+        $this->repository = new NewsRepository();
     }
 
     public function storeAction()
@@ -36,17 +36,13 @@ class NewsController extends ApiController
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
         $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
-        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:'';
+        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:null;
 
 
         $result = $this->repository->createRepo($params);
 
         if (!$result) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Create Error.'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Create Error.']];
         }
 
         return $this->output(200, $result);
@@ -82,11 +78,7 @@ class NewsController extends ApiController
         $result = $this->repository->updateRepo($condition , $params);
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Update Error.'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Update Error.']];
         }
 
         return $this->output(200, $params);
@@ -102,11 +94,7 @@ class NewsController extends ApiController
         $result = $this->repository->getById($condition);
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Data Not Found'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Data Not Found']];
         }else{
             $result = count($result) ? $this->setDataDetail($result) : [];
         }
@@ -151,7 +139,7 @@ class NewsController extends ApiController
             // 'data'            => count($record) ? $record : []
             'data'            => count($record) ? $this->setDataList($record, $inputs) : []
         ];
-
+        
         return $this->output(200, $output);
     }
 
@@ -207,12 +195,8 @@ class NewsController extends ApiController
         // destroy
         $result = $this->repository->destroyRepo($condition);
 
-         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Delete Error.'
-                ]
-            ]);
+        if (empty($result)) {
+            return [400 => ['msgError'=>'Delete Error']];
         }
 
         return $this->output(200, $result);
@@ -237,11 +221,7 @@ class NewsController extends ApiController
         $result = [];
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Delete Error.'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Delete Error.This service is not available.']];
         }
 
         return $this->output(200, $result);
@@ -268,11 +248,7 @@ class NewsController extends ApiController
         $result = [];
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Delete Error.'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Delete Error.This service is not available.']];
         }
 
         return $this->output(200, $result);
@@ -297,11 +273,7 @@ class NewsController extends ApiController
         $result = $this->repository->getById($condition);
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Data Not Found'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Data Not Found']];
         }
 
         $params['status'] = $inputs['status'];
@@ -310,11 +282,7 @@ class NewsController extends ApiController
         $result = $this->repository->statusRepo($condition, $params);
 
         if (empty($result)) {
-            return $this->output(200, [
-                'errors' => [
-                    'message' => 'Update Status Error.'
-                ]
-            ]);
+            return [400 => ['msgError'=>'Update Status Error.']];
         }
 
         return $this->output(200, $params);
