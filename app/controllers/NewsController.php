@@ -133,9 +133,8 @@ class NewsController extends ApiController
         $countAll = $repository->getCountAll([$condition]);
 
         $output = [
-            'recordsTotal'    => count($record), //count page
-            'recordsFiltered' => $countAll, //count all
-            // 'data'            => count($record) ? $record : []
+            'recordsTotal'    => $countAll, //count page
+            'recordsFiltered' => count($record), //count all
             'data'            => count($record) ? $this->setDataList($record, $inputs) : []
         ];
         
