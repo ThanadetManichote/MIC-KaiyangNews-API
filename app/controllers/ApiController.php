@@ -643,7 +643,7 @@ class ApiController extends Controller
         $where = '';
 
         $current_date = date("Y-m-d");
-        $where .= " AND status = 'active' AND '".$current_date."' >= start_date  AND '".$current_date." <= end_date'";
+        $where .= " AND status = 'active' AND  start_date <= '".$current_date."'  AND  end_date >= '".$current_date."'";
         return $where;
     }
 
