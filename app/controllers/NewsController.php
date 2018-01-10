@@ -121,9 +121,8 @@ class NewsController extends ApiController
 
         $filter = [
             'conditions' => $condition,
-            'limit' => ['number'=>isset($inputs['limit']) ? $inputs['limit'] : 1000,
-                        'offset'=>isset($inputs['offset']) ? $inputs['offset'] : 0
-            ],
+            'offset' => isset($inputs['offset']) ? $inputs['offset'] : 0,
+            'limit' => isset($inputs['limit']) ? $inputs['limit'] : 1000,
             'order'  => $sort
         ];
 
@@ -156,9 +155,8 @@ class NewsController extends ApiController
 
         $filter = [
             'conditions' => $condition,
-            'limit' => ['number'=>isset($inputs['limit']) ? $inputs['limit'] : 1000,
-                        'offset'=>isset($inputs['offset']) ? $inputs['offset'] : 0
-            ],
+            'offset' => isset($inputs['offset']) ? $inputs['offset'] : 0,
+            'limit' => isset($inputs['limit']) ? $inputs['limit'] : 1000,
             'order'  => $sort
         ];
 
