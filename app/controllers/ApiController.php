@@ -637,13 +637,13 @@ class ApiController extends Controller
         return $where;
     }
 
-    protected function setCustomWhere()
+    protected function setWhereOnline()
     {
         //default customwhere
         $where = '';
 
         $current_date = date("Y-m-d");
-        $where .= " AND status = 'active' AND end_date >= '".$current_date."'";
+        $where .= " AND status = 'active' AND start_date >= '".$current_date."' AND '".$current_date." <= end_date'";
         return $where;
     }
 

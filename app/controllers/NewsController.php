@@ -114,6 +114,13 @@ class NewsController extends ApiController
         $condition = " 1 ";
         //order my sql in dataList
         $sort   = $this->setSortDataListMySql($inputs);
+        // //show online
+        if (isset($inputs['online'])){
+            if(mb_strtolower($inputs['online'], "UTF-8")  == 'y'){
+                $condition .= $this->setWhereOnline();
+            }
+            unset($inputs['online']);
+        }
         //search my sql in dataList
         $condition  .= $this->setWhereDataTableMySql($inputs);
         //repository
@@ -128,6 +135,11 @@ class NewsController extends ApiController
 
         //get all data by condition
         $record   = $repository->getDataAll($filter);
+
+        if(!is_array($record)){
+            return [400 => ['msgError'=>'Data Not Found']];
+        }
+
         //get count all data
         $countAll = $repository->getCountAll([$condition]);
 
@@ -137,40 +149,6 @@ class NewsController extends ApiController
             'data'            => count($record) ? $this->setDataList($record, $inputs) : []
         ];
         
-        return $this->output(200, $output);
-    }
-
-    public function datalistallAction()
-    {
-        //get input
-        $inputs = $this->getInput();
-
-        $condition = " 1 ";
-        //order my sql in dataList
-        $sort   = $this->setSortDataListMySql($inputs);
-        //search my sql in dataList
-        $condition  .= $this->setWhereDataTableMySql($inputs);
-        //repository
-        $repository = $this->repository;
-
-        $filter = [
-            'conditions' => $condition,
-            'offset' => isset($inputs['offset']) ? $inputs['offset'] : 0,
-            'limit' => isset($inputs['limit']) ? $inputs['limit'] : 1000,
-            'order'  => $sort
-        ];
-
-        //get all data by condition
-        $record   = $repository->getDataAll($filter);
-        //get count all data
-        $countAll = $repository->getCountAll([$condition]);
-
-        $output = [
-            'recordsTotal'    => $countAll, //count page
-            'recordsFiltered' => count($record), //count all
-            'data'            => count($record) ? $this->setDataList($record, $inputs) : []
-        ];
-
         return $this->output(200, $output);
     }
 
