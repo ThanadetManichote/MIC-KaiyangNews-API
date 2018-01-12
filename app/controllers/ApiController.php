@@ -634,14 +634,13 @@ class ApiController extends Controller
         {
             $where .= " AND start_date <= '" . $params['start_date'] . "' 
                         AND end_date >= '". $params['end_date'] ."'  ";
-
-            unset($params['start_date']);
-            unset($params['end_date']);
         }
 
         if (isset($params) && !empty($params)) {
             foreach ($params as $k => $value) {
-                $where .= " AND " . $k . " LIKE '%" . $value . "%' ";
+                if ($value != '') {
+                    $where .= " AND " . $k . " LIKE '%" . $value . "%' ";
+                }
             }
         }
 
