@@ -1,0 +1,10 @@
+mic-feednews-api-web:
+  build: web/
+  tty: true
+  ports:
+    - "8136:80"
+  volumes:
+    - ../:/var/www/html
+  environment:
+    ENVIRONMENT: staging_feed
+  container_name: mic-feednews-api-web
