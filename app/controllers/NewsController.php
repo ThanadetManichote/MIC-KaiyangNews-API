@@ -26,18 +26,17 @@ class NewsController extends ApiController
             return [400 => ['msgError' => $validate['msgError']] ];
         }
 
-        $params['thumbnail']= isset($inputs['thumbnail'])?$inputs['thumbnail']:"";
-        $params['image']   = isset($inputs['image'])?$inputs['image']:"";
-        $params['start_date'] = isset($inputs['start_date'])?$inputs['start_date']:"";
-        $params['end_date']   = isset($inputs['end_date'])?$inputs['end_date']:"";
-        $params['status']     = !empty($inputs['status'])?$inputs['status']:"inactive";
-        $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
-        $params['name'] = isset($inputs['name'])?$inputs['name']:'';
-        $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
-        $params['position'] = isset($inputs['position'])?$inputs['position']:0;
+        $params['thumbnail']   = isset($inputs['thumbnail'])?$inputs['thumbnail']:"";
+        $params['image']       = isset($inputs['image'])?$inputs['image']:"";
+        $params['start_date']  = isset($inputs['start_date'])?$inputs['start_date']:"";
+        $params['end_date']    = isset($inputs['end_date'])?$inputs['end_date']:"";
+        $params['status']      = !empty($inputs['status'])?$inputs['status']:"inactive";
+        $params['app_show']    = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
+        $params['name']        = isset($inputs['name'])?$inputs['name']:'';
+        $params['detail']      = isset($inputs['detail'])?$inputs['detail']:'';
+        $params['position']    = isset($inputs['position'])?$inputs['position']:0;
         $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
-        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:null;
-
+        $params['sent_date']   = isset($inputs['sent_date'])?$inputs['sent_date']:null;
 
         $result = $this->repository->createRepo($params);
 
@@ -63,17 +62,23 @@ class NewsController extends ApiController
             'conditions' => 'id =' . $id
         ];
 
-        $params['thumbnail']= isset($inputs['thumbnail'])?$inputs['thumbnail']:"";
-        $params['image']   = isset($inputs['image'])?$inputs['image']:"";
-        $params['start_date'] = isset($inputs['start_date'])?$inputs['start_date']:"";
-        $params['end_date']   = isset($inputs['end_date'])?$inputs['end_date']:"";
-        $params['status']     = !empty($inputs['status'])?$inputs['status']:"inactive";
-        $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
-        $params['name'] = isset($inputs['name'])?$inputs['name']:'';
-        $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
-        $params['position'] = isset($inputs['position'])?$inputs['position']:0;
+        if (isset($inputs['thumbnail'])) {
+            $params['thumbnail']   = $inputs['thumbnail'];
+        }
+
+        if (isset($inputs['image'])) {
+            $params['image']   = $inputs['image'];
+        }
+
+        $params['start_date']  = isset($inputs['start_date'])?$inputs['start_date']:"";
+        $params['end_date']    = isset($inputs['end_date'])?$inputs['end_date']:"";
+        $params['status']      = !empty($inputs['status'])?$inputs['status']:"inactive";
+        $params['app_show']    = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
+        $params['name']        = isset($inputs['name'])?$inputs['name']:'';
+        $params['detail']      = isset($inputs['detail'])?$inputs['detail']:'';
+        $params['position']    = isset($inputs['position'])?$inputs['position']:0;
         $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
-        $params['sent_date'] = isset($inputs['sent_date'])?$inputs['sent_date']:'';
+        $params['sent_date']   = isset($inputs['sent_date'])?$inputs['sent_date']:'';
 
         $result = $this->repository->updateRepo($condition , $params);
 
@@ -112,20 +117,34 @@ class NewsController extends ApiController
         $inputs = $this->getInput();
 
         $condition = " 1 ";
+
+        $online = false;
+
+        if (isset($inputs['online']) && $inputs['online'] == 'y') {
+            $online = true;
+        }
+
+        unset($inputs['online']);
+
         //order my sql in dataList
         $sort   = $this->setSortDataListMySql($inputs);
+
         //search my sql in dataList
         $condition  .= $this->setWhereDataTableMySql($inputs);
+
         //custom where
-        $condition  .= $this->setCustomWhere($inputs);
+        if ($online) {
+         $condition  .= $this->setCustomWhere($inputs);
+        }
+
         //repository
         $repository = $this->repository;
 
         $filter = [
             'conditions' => $condition,
-            'skip'  => isset($inputs['offset']) ? $inputs['offset'] : 0,
-            'limit' => isset($inputs['limit']) ? $inputs['limit'] :10000,
-            'order'  => $sort
+            'offset'     => isset($inputs['offset']) ? $inputs['offset'] : 0,
+            'limit'      => isset($inputs['limit']) ? $inputs['limit'] :10000,
+            'order'      => $sort
         ];
 
         //get all data by condition
@@ -133,9 +152,13 @@ class NewsController extends ApiController
         //get count all data
         $countAll = $repository->getCountAll([$condition]);
 
+        if ($countAll == 0) {
+            return [404 => ['msgError'=>'Data not Found']];
+        }
+
         $output = [
-            'recordsTotal'    => count($record), //count page
-            'recordsFiltered' => $countAll, //count all
+            'recordsTotal'    => $countAll, //count all
+            'recordsFiltered' => count($record), //count page
             // 'data'            => count($record) ? $record : []
             'data'            => count($record) ? $this->setDataList($record, $inputs) : []
         ];

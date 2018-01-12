@@ -1,36 +1,36 @@
-mic-kaiyangnews-api-web:
+mic-feednews-api-web:
   build: web/
   tty: true
   ports:
-    - "8135:80"
+    - "8136:80"
   volumes:
     - ../:/var/www/html
   links:
-    - mic-kaiyangnews-api-mysql:mysql
+    - mic-feednews-api-mysql:mysql
   environment:
     ENVIRONMENT: docker
-  container_name: mic-kaiyangnews-api-web
+  container_name: mic-feednews-api-web
 
-mic-kaiyangnews-api-mysql:
+mic-feednews-api-mysql:
   build: mysql/
   ports:
-    - "33113:3306"
+    - "33114:3306"
   environment:
     - MYSQL_ROOT_PASSWORD=123456
-  container_name: mic-kaiyangnews-api-mysql
+  container_name: mic-feednews-api-mysql
 
-mic-kaiyangnews-api-pma:
+mic-feednews-api-pma:
   image: pitchanon/phpmyadmin:latest
   ports:
-    - "32065:80"
+    - "32066:80"
   volumes:
     - .:/var/www/html
   links:
-    - mic-kaiyangnews-api-mysql:mysql
-  container_name: mic-kaiyangnews-api-pma
+    - mic-feednews-api-mysql:mysql
+  container_name: mic-feednews-api-pma
   environment:
     - PMA_ARBITRARY=1
-    - PMA_HOST=mic-kaiyangnews-api-mysql
+    - PMA_HOST=mic-feednews-api-mysql
     - PMA_PORT=3306
     - PMA_USER=root
     - PMA_PASSWORD=123456

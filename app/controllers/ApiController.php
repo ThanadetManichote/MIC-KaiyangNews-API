@@ -336,7 +336,7 @@ class ApiController extends Controller
         return $output;
     }
 
-    protected function afterExecuteRoute($dispatcher)
+    public function afterExecuteRoute($dispatcher)
     {
         if ($this->mode == 'unittest') {
             $data = $this->data;
@@ -525,7 +525,7 @@ class ApiController extends Controller
     protected function setSortDataListMySql(array $params)
     {
         //default sort
-        $sort = ' start_date desc ';
+        $sort = ' id asc ';
 
         if (isset($params['order']) && !empty($params['order'])) {
             $sort = ' ';
@@ -541,6 +541,7 @@ class ApiController extends Controller
             $orderby = explode('|' , $params['orderby']);
             $sort .= $orderby[0] . " " . ($orderby[1] === 'asc' ? 'asc' : 'desc');
         }
+
 
         return $sort;
     }
@@ -628,6 +629,16 @@ class ApiController extends Controller
         //default search
         $where = '';
 
+        if ( isset($params['start_date']) && $params['start_date'] != '' && 
+              isset($params['end_date']) && $params['end_date'] != '' ) 
+        {
+            $where .= " AND start_date <= '" . $params['start_date'] . "' 
+                        AND end_date >= '". $params['end_date'] ."'  ";
+
+            unset($params['start_date']);
+            unset($params['end_date']);
+        }
+
         if (isset($params) && !empty($params)) {
             foreach ($params as $k => $value) {
                 $where .= " AND " . $k . " LIKE '%" . $value . "%' ";
@@ -643,7 +654,7 @@ class ApiController extends Controller
         $where = '';
 
         $current_date = date("Y-m-d");
-        $where .= " AND status = 'active' AND end_date >= '".$current_date."'";
+        $where .= " AND status = 'active' AND start_date <= '".$current_date." 00:00:00' AND end_date >= '".$current_date." 23:59:59'";
         return $where;
     }
 

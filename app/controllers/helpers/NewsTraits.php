@@ -42,8 +42,6 @@ trait NewsTraits
             'type'   => 'required',
             'fields' => [
                 'name',
-                'image',
-                'thumbnail',
                 'start_date',
                 'end_date',
                 'status',
@@ -103,20 +101,20 @@ trait NewsTraits
         if (!empty($data)) {
             foreach ($data as $kData => $vData) {
                 $dataList[] = [
-                    'id' => $vData['id'],
-                    'name' => $vData['name'],
-                    'detail' => $vData['detail'],
-                    'thumbnail' => $vData['thumbnail'],
-                    'image' => $vData['image'],
-                    'app_show' => $vData['app_show'],
-                    'position' => $vData['position'],
-                    'start_date' => $vData['start_date'],
-                    'end_date' => $vData['end_date'],
-                    'created_at' => $vData['created_at'],
-                    'updated_at' => $vData['updated_at'],
-                    'status' => $vData['status'],
+                    'id'          => $vData['id'],
+                    'name'        => $vData['name'],
+                    'detail'      => $vData['detail'],
+                    'thumbnail'   => $vData['thumbnail'],
+                    'image'       => $vData['image'],
+                    'app_show'    => $vData['app_show'],
+                    'position'    => $vData['position'],
+                    'start_date'  => $vData['start_date'],
+                    'end_date'    => $vData['end_date'],
+                    'created_at'  => $vData['created_at'],
+                    'updated_at'  => $vData['updated_at'],
+                    'status'      => $vData['status'],
                     'sent_status' => $vData['sent_status'],
-                    'sent_date' => $vData['sent_date'],
+                    'sent_date'   => $vData['sent_date'],
                 ];
             }
         }
@@ -130,20 +128,20 @@ trait NewsTraits
         $dataDetail = [];
         if (!empty($data)) {
                 $dataDetail = [
-                    'id' => $data['id'],
-                    'name' => $data['name'],
-                    'detail' => $data['detail'],
-                    'thumbnail' => $data['thumbnail'],
-                    'image' => $data['image'],
-                    'app_show' => $data['app_show'],
-                    'position' => $data['position'],
-                    'start_date' => $data['start_date'],
-                    'end_date' => $data['end_date'],
-                    'created_at' => $data['created_at'],
-                    'updated_at' => $data['updated_at'],
-                    'status' => $data['status'],
+                    'id'          => $data['id'],
+                    'name'        => $data['name'],
+                    'detail'      => $data['detail'],
+                    'thumbnail'   => $data['thumbnail'],
+                    'image'       => $data['image'],
+                    'app_show'    => $data['app_show'],
+                    'position'    => $data['position'],
+                    'start_date'  => $data['start_date'],
+                    'end_date'    => $data['end_date'],
+                    'created_at'  => $data['created_at'],
+                    'updated_at'  => $data['updated_at'],
+                    'status'      => $data['status'],
                     'sent_status' => $data['sent_status'],
-                    'sent_date' => $data['sent_date'],
+                    'sent_date'   => $data['sent_date'],
                 ];
         }
         

@@ -14,7 +14,7 @@ class NewsRepository extends BaseRepository {
      * @return array (default [])
      */
     public function getDataAll(array $condition = [])
-    {
+    {   
         return $this->getFind($this->nameClass, $condition);
     }
 

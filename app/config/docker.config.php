@@ -10,7 +10,7 @@ $settings = [
             'dbname'   => 'mic_activity'
         ],
         'sql' => [
-            'host'     => 'mic-kaiyangnews-api-mysql',
+            'host'     => 'mic-feednews-api-mysql',
             'username' => 'root',
             'password' => '123456',
             'dbname'   => 'mic_news',
@@ -26,8 +26,8 @@ $settings = [
         'controllersDir' => __DIR__.'/../../app/controllers/',
         'libraryDir'     => __DIR__.'/../../app/library/',
         'testDir'        => __DIR__.'/../../app/tests/',
-        'baseUri'        => 'http://alpha-kaiyang-myanmar-api.eggdigital.com/',
-        'staticUri'      => 'http://alpha-kaiyang-myanmar-api.eggdigital.com/',
+        'baseUri'        => 'http://alpha-feed-myanmar-api.eggdigital.com/',
+        'staticUri'      => 'http://alpha-feed-myanmar-api.eggdigital.com/',
     ],
-    'image_path'  => 'http://kaiyang.dev:8840/uploads/news/',
+    'image_path'  => 'http://feed.dev:8840/uploads/news/',
 ];
