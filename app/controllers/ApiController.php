@@ -636,6 +636,9 @@ class ApiController extends Controller
                         AND end_date >= '". $params['end_date'] ."'  ";
         }
 
+        unset($params['start_date']);
+        unset($params['end_date']);
+
         if (isset($params) && !empty($params)) {
             foreach ($params as $k => $value) {
                 if ($value != '') {
@@ -647,7 +650,7 @@ class ApiController extends Controller
         return $where;
     }
 
-    protected function setCustomWhere()
+    protected function setWhereOnline()
     {
         //default customwhere
         $where = '';

@@ -134,7 +134,7 @@ class NewsController extends ApiController
 
         //custom where
         if ($online) {
-         $condition  .= $this->setCustomWhere($inputs);
+         $condition  .= $this->setWhereOnline($inputs);
         }
 
         //repository
@@ -186,18 +186,19 @@ class NewsController extends ApiController
             'order'  => $sort
         ];
 
-        //get all data by condition
-        $record   = $repository->getDataAll($filter);
+        if(!is_array($record)){
+            return [400 => ['msgError'=>'Data Not Found']];
+        }
+
         //get count all data
         $countAll = $repository->getCountAll([$condition]);
 
         $output = [
-            'recordsTotal'    => count($record), //count page
-            'recordsFiltered' => $countAll, //count all
-            // 'data'            => count($record) ? $record : []
+            'recordsTotal'    => $countAll, //count page
+            'recordsFiltered' => count($record), //count all
             'data'            => count($record) ? $this->setDataList($record, $inputs) : []
         ];
-
+        
         return $this->output(200, $output);
     }
 
