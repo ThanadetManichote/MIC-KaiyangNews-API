@@ -8,6 +8,8 @@ if (getenv('ENVIRONMENT') === 'develop') {
     $environment = 'staging_feed';
 } elseif (getenv('ENVIRONMENT') === 'production') {
     $environment = 'production';
+} elseif (getenv('ENVIRONMENT') === 'production_feed') {
+    $environment = 'production_feed';
 } elseif (getenv('ENVIRONMENT') === 'docker') {
     $environment = 'docker';
 } else {
