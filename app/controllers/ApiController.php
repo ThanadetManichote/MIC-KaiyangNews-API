@@ -44,7 +44,7 @@ class ApiController extends Controller
         $this->sort    = isset($this->input['sort']) && $this->input['sort'] != '' ? $this->input['sort'] : 'desc';
     }
 
-    protected function postInput()
+    public function postInput()
     {
         $request  = $this->request;
         $rawInput = $request->getRawBody();
@@ -61,7 +61,7 @@ class ApiController extends Controller
      * Method for get put paramerter
      * @return array
      */
-    protected function putInput()
+    public function putInput()
     {
         $request  = $this->request;
         $rawInput = json_decode($request->getRawBody(), true);
@@ -73,7 +73,7 @@ class ApiController extends Controller
         return is_array($rawInput) ? $rawInput : [];
     }
 
-    protected function getInput()
+    public function getInput()
     {
         $params = $this->request->getQuery();
 
@@ -81,7 +81,7 @@ class ApiController extends Controller
         return $params;
     }
 
-    protected function validateApi($rules, $default = [], $input = [])
+    public function validateApi($rules, $default = [], $input = [])
     {
         $return   = [];
         $validate = $this->validate($input, $rules);
@@ -104,7 +104,7 @@ class ApiController extends Controller
         return array_merge($input, $return);
     }
 
-    protected function validateRegular($input, $field, $validation)
+    public function validateRegular($input, $field, $validation)
     {
         $language = array_values($this->language['supports']->toArray());
 
@@ -134,7 +134,7 @@ class ApiController extends Controller
      * @param $input
      * @param $rules
      */
-    protected function validate($input, $rules)
+    public function validate($input, $rules)
     {
         $validation = new Validation();
 
@@ -229,7 +229,7 @@ class ApiController extends Controller
      * @param  $statusCode
      * @return mixed
      */
-    protected function validateError($fieldError, $msgError, $statusCode = null)
+    public function validateError($fieldError, $msgError, $statusCode = null)
     {
         $status = $this->status;
 
@@ -268,7 +268,7 @@ class ApiController extends Controller
      * @param  $message
      * @return mixed
      */
-    protected function responseData($data, $status_code = 200, $message = 'Success')
+    public function responseData($data, $status_code = 200, $message = 'Success')
     {
         $this->response->setContentType('application/json', 'UTF-8');
         $this->response->setStatusCode($status_code, $message);
@@ -277,7 +277,7 @@ class ApiController extends Controller
         return $this->response;
     }
 
-    protected function validateBussinessError($field)
+    public function validateBussinessError($field)
     {
         $errorMsg = $this->message;
 
@@ -288,7 +288,7 @@ class ApiController extends Controller
         );
     }
 
-    // protected function getTranslation()
+    // public function getTranslation()
     // {
     //     $language    = $this->request->getBestLanguage();
     //     $translation = '../app/language/' . $language . '/errormsg.php';
@@ -306,7 +306,7 @@ class ApiController extends Controller
     //     );
     // }
 
-    protected function getHeaders()
+    public function getHeaders()
     {
         $request  = $this->request;
         $headers  = $request->getHeaders();
@@ -314,7 +314,7 @@ class ApiController extends Controller
         return $headers;
     }
 
-    protected function setPagination($input)
+    public function setPagination($input)
     {
         $input['page']    = $this->page;
         $input['perpage'] = $this->perpage;
@@ -336,7 +336,7 @@ class ApiController extends Controller
         return $output;
     }
 
-    protected function afterExecuteRoute($dispatcher)
+    public function afterExecuteRoute($dispatcher)
     {
         if ($this->mode == 'unittest') {
             $data = $this->data;
@@ -383,7 +383,7 @@ class ApiController extends Controller
         }
     }
 
-    protected function setResponseStatus($code)
+    public function setResponseStatus($code)
     {
         $status_reason = array(
             0   => 'OK',
@@ -446,7 +446,7 @@ class ApiController extends Controller
     /**
      * @return array
      */
-    protected function output($code = 400, array $records, $paginate = false)
+    public function output($code = 400, array $records, $paginate = false)
     {
         if ($paginate) {
             $pagination = [
@@ -480,7 +480,7 @@ class ApiController extends Controller
     /**
      * Get search regex text mongo
      */
-    protected function regexSearch($text)
+    public function regexSearch($text)
     {
         return new Regex($text, 'i');
     }
@@ -488,7 +488,7 @@ class ApiController extends Controller
     /**
      * Convert id mongo
      */
-    protected function convertId($id)
+    public function convertId($id)
     {
         return new ObjectID($id);
     }
@@ -497,7 +497,7 @@ class ApiController extends Controller
      * Set sort dataList Mongo
      * @return array (default [created_at => -1])
      */
-    protected function setSortDataListMongo(array $params)
+    public function setSortDataListMongo(array $params)
     {
         //default sort
         $sort = ['created_at' => -1];
@@ -522,7 +522,7 @@ class ApiController extends Controller
      * Set sort dataList My SQL
      * @return array (default [created_at => -1])
      */
-    protected function setSortDataListMySql(array $params)
+    public function setSortDataListMySql(array $params)
     {
         //default sort
         $sort = ' start_date desc ';
@@ -549,7 +549,7 @@ class ApiController extends Controller
      * Set search dataList Mongo
      * @return array (default [deleted_at = null])
      */
-    protected function setSearchDataListMongo(array $params)
+    public function setSearchDataListMongo(array $params)
     {
         //default search
         $search = [];
@@ -567,7 +567,7 @@ class ApiController extends Controller
      * Set search dataList My Sql
      * @return array (default [deleted_at = null])
      */
-    protected function setSearchDataListMySql(array $params)
+    public function setSearchDataListMySql(array $params)
     {
         //default search
         $search = ' ';
@@ -585,7 +585,7 @@ class ApiController extends Controller
      * Set search dataList Mongo
      * @return array ()
      */
-    protected function setWhereDataTableMongo(array $params)
+    public function setWhereDataTableMongo(array $params)
     {
         unset($params['start']);
         unset($params['length']);
@@ -613,7 +613,7 @@ class ApiController extends Controller
      * Set search dataList
      * @return array ()
      */
-    protected function setWhereDataTableMySql(array $params)
+    public function setWhereDataTableMySql(array $params)
     {
         unset($params['start']);
         unset($params['length']);
@@ -637,7 +637,7 @@ class ApiController extends Controller
         return $where;
     }
 
-    protected function setWhereOnline()
+    public function setWhereOnline()
     {
         //default customwhere
         $where = '';
@@ -651,7 +651,7 @@ class ApiController extends Controller
      * Get id mongo multi Mongo
      * @return array (default [])
      */
-    protected function getMultiIdMongo(array $params)
+    public function getMultiIdMongo(array $params)
     {
         $id = [];
 
@@ -671,7 +671,7 @@ class ApiController extends Controller
      * Get id mongo multi My Sql
      * @return array (default [])
      */
-    protected function getMultiIdMySql(array $params)
+    public function getMultiIdMySql(array $params)
     {
         $id = '';
         $str = '';

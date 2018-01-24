@@ -32,6 +32,8 @@ class NewsController extends ApiController
         $params['end_date']   = isset($inputs['end_date'])?$inputs['end_date']:"";
         $params['status']     = !empty($inputs['status'])?$inputs['status']:"inactive";
         $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
+        $params['is_customer']     = !empty($inputs['is_customer'])?$inputs['is_customer']: 0;
+        $params['is_business']     = !empty($inputs['is_business'])?$inputs['is_business']: 0;
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
@@ -69,6 +71,8 @@ class NewsController extends ApiController
         $params['end_date']   = isset($inputs['end_date'])?$inputs['end_date']:"";
         $params['status']     = !empty($inputs['status'])?$inputs['status']:"inactive";
         $params['app_show']     = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
+        $params['is_customer']     = !empty($inputs['is_customer'])?$inputs['is_customer']: 0;
+        $params['is_business']     = !empty($inputs['is_business'])?$inputs['is_business']: 0;
         $params['name'] = isset($inputs['name'])?$inputs['name']:'';
         $params['detail'] = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position'] = isset($inputs['position'])?$inputs['position']:0;
@@ -110,6 +114,7 @@ class NewsController extends ApiController
     {
         //get input
         $inputs = $this->getInput();
+        $inputs = $this->changeParamFilter($inputs);
 
         $condition = " 1 ";
         //order my sql in dataList
@@ -150,6 +155,21 @@ class NewsController extends ApiController
         ];
         
         return $this->output(200, $output);
+    }
+
+    private function changeParamFilter($param = array())
+    {
+        $filter = array('customer', 'business');
+        $setFilter = array();
+        foreach ($param as $key => $value) {
+            if(in_array($value, $filter)){
+                $setFilter['is_'.$value] = 1;
+            }else{
+                $setFilter[$key] = $value;
+            }
+        }
+
+        return $setFilter;
     }
 
     /**
