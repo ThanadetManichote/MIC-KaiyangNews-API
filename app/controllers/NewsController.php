@@ -26,14 +26,16 @@ class NewsController extends ApiController
             return [400 => ['msgError' => $validate['msgError']] ];
         }
 
-        $params['thumbnail']   = isset($inputs['thumbnail'])?$inputs['thumbnail']:"";
-        $params['image']       = isset($inputs['image'])?$inputs['image']:"";
+        $params['name_en']     = isset($inputs['name_en'])?$inputs['name_en']:'';
+        $params['name_mm']     = isset($inputs['name_mm'])?$inputs['name_mm']:'';
+        $params['detail_en']   = isset($inputs['detail_en'])?$inputs['detail_en']:'';
+        $params['detail_mm']   = isset($inputs['detail_mm'])?$inputs['detail_mm']:'';
+        $params['image_en']    = isset($inputs['image_en'])?$inputs['image_en']:"";
+        $params['image_mm']    = isset($inputs['image_mm'])?$inputs['image_mm']:"";
         $params['start_date']  = isset($inputs['start_date'])?$inputs['start_date']:"";
         $params['end_date']    = isset($inputs['end_date'])?$inputs['end_date']:"";
         $params['status']      = !empty($inputs['status'])?$inputs['status']:"inactive";
         $params['app_show']    = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
-        $params['name']        = isset($inputs['name'])?$inputs['name']:'';
-        $params['detail']      = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position']    = isset($inputs['position'])?$inputs['position']:0;
         $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
         $params['sent_date']   = isset($inputs['sent_date'])?$inputs['sent_date']:null;
@@ -62,20 +64,22 @@ class NewsController extends ApiController
             'conditions' => 'id =' . $id
         ];
 
-        if (isset($inputs['thumbnail'])) {
-            $params['thumbnail']   = $inputs['thumbnail'];
+        if (isset($inputs['image_en'])) {
+            $params['image_en']   = $inputs['image_en'];
         }
 
-        if (isset($inputs['image'])) {
-            $params['image']   = $inputs['image'];
+        if (isset($inputs['image_mm'])) {
+            $params['image_mm']   = $inputs['image_mm'];
         }
 
+        $params['name_en']     = isset($inputs['name_en'])?$inputs['name_en']:'';
+        $params['name_mm']     = isset($inputs['name_mm'])?$inputs['name_mm']:'';
+        $params['detail_en']   = isset($inputs['detail_en'])?$inputs['detail_en']:'';
+        $params['detail_mm']   = isset($inputs['detail_mm'])?$inputs['detail_mm']:'';
         $params['start_date']  = isset($inputs['start_date'])?$inputs['start_date']:"";
         $params['end_date']    = isset($inputs['end_date'])?$inputs['end_date']:"";
         $params['status']      = !empty($inputs['status'])?$inputs['status']:"inactive";
         $params['app_show']    = !empty($inputs['app_show'])?$inputs['app_show']:"customer";
-        $params['name']        = isset($inputs['name'])?$inputs['name']:'';
-        $params['detail']      = isset($inputs['detail'])?$inputs['detail']:'';
         $params['position']    = isset($inputs['position'])?$inputs['position']:0;
         $params['sent_status'] = isset($inputs['sent_status'])?$inputs['sent_status']:1;
         $params['sent_date']   = isset($inputs['sent_date'])?$inputs['sent_date']:'';
