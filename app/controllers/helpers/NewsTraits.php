@@ -7,9 +7,8 @@ trait NewsTraits
         [
             'type'   => 'required',
             'fields' => [
-                'name',
-                'image',
-                'thumbnail',
+                'name_en',
+                'detail_en',
                 'start_date',
                 'end_date',
                 'status',
@@ -41,7 +40,7 @@ trait NewsTraits
         [
             'type'   => 'required',
             'fields' => [
-                'name',
+                'name_en',
                 'start_date',
                 'end_date',
                 'status',
@@ -102,10 +101,12 @@ trait NewsTraits
             foreach ($data as $kData => $vData) {
                 $dataList[] = [
                     'id'          => $vData['id'],
-                    'name'        => $vData['name'],
-                    'detail'      => $vData['detail'],
-                    'thumbnail'   => $vData['thumbnail'],
-                    'image'       => $vData['image'],
+                    'name_en'     => $vData['name_en'],
+                    'name_mm'     => $vData['name_mm'],
+                    'detail_en'   => $vData['detail_en'],
+                    'detail_mm'   => $vData['detail_mm'],
+                    'image_en'    => $vData['image_en'],
+                    'image_mm'    => $vData['image_mm'],
                     'app_show'    => $vData['app_show'],
                     'position'    => $vData['position'],
                     'start_date'  => $vData['start_date'],
@@ -129,10 +130,12 @@ trait NewsTraits
         if (!empty($data)) {
                 $dataDetail = [
                     'id'          => $data['id'],
-                    'name'        => $data['name'],
-                    'detail'      => $data['detail'],
-                    'thumbnail'   => $data['thumbnail'],
-                    'image'       => $data['image'],
+                    'name_en'     => $data['name_en'],
+                    'name_mm'     => $data['name_mm'],
+                    'detail_en'   => $data['detail_en'],
+                    'detail_mm'   => $data['detail_mm'],
+                    'image_en'    => $data['image_en'],
+                    'image_mm'    => $data['image_mm'],
                     'app_show'    => $data['app_show'],
                     'position'    => $data['position'],
                     'start_date'  => $data['start_date'],
